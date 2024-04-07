@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  flight_number: MyString
+  departure_time: 2024-04-06 17:55:16
+  arrival_time: 2024-04-06 17:55:16
+  price: 9.99
+  departure_airport: one
+  arrival_airport: one
+
+two:
+  flight_number: MyString
+  departure_time: 2024-04-06 17:55:16
+  arrival_time: 2024-04-06 17:55:16
+  price: 9.99
+  departure_airport: two
+  arrival_airport: two
