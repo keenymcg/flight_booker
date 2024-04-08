@@ -5,8 +5,8 @@ class CreateFlights < ActiveRecord::Migration[7.1]
       t.datetime :departure_time
       t.datetime :arrival_time
       t.decimal :price
-      t.references :airports, :arrival_airport, foreign_key: true
-      # t.references :airports, :departure_airport, foreign_key: true
+      t.references :arrival_airport, foreign_key: { to_table: :airports }
+      t.references :departure_airport, foreign_key: { to_table: :airports }
 
       t.timestamps
     end

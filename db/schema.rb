@@ -24,8 +24,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_07_152314) do
     t.datetime "departure_time"
     t.datetime "arrival_time"
     t.decimal "price"
-    t.integer "departure_airport_id", null: false
-    t.integer "arrival_airport_id", null: false
+    t.integer "arrival_airport_id"
+    t.integer "departure_airport_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["arrival_airport_id"], name: "index_flights_on_arrival_airport_id"
@@ -59,14 +59,12 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_07_152314) do
     t.datetime "remember_created_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "first_name"
-    t.string "last_name"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "flights", "arrival_airports"
-  add_foreign_key "flights", "departure_airports"
+  add_foreign_key "flights", "airports", column: "arrival_airport_id"
+  add_foreign_key "flights", "airports", column: "departure_airport_id"
   add_foreign_key "passengers", "reservations"
   add_foreign_key "reservations", "flights"
   add_foreign_key "reservations", "users"
