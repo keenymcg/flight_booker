@@ -1,27 +1,67 @@
 <h1>Search Flights</h1>
 
-<%= form_with url: flights_path, method: :get do |form| %>
-    <div class="field">
-        <%= form.label :departure_airport_id, "Departure Airport" %>
-        <%= form.collection_select :departure_airport_id, Airport.all, :id, :name, prompt: "Select Departure Airport" %>
-    </div>
+<%= render 'search_form', flight: @flight %>
 
-    <div class="field">
-        <%= form.label :arrival_airport_id, "Arrival Airport" %>
-        <%= form.collection_select :arrival_airport_id, Airport.all, :id, :name, prompt: "Select Arrival Airport" %>
-    </div>
+<br>
+<br>
+<br>
 
-    <div class="field">
-        <%= form.label :passenger_count, "Number of Passengers" %>
-        <%= form.number_field :passenger_count, min: 1, max: 3 %>
-    </div>
+<% if @searched_flights and @searched_flights.any? %>
+    <h2>Searched Results</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Flight</th>
+                <th>Departure</th>
+                <th>Arrival</th>
+                <th>Departure Time</th>
+                <th>Arrival Time</th>
+                <th>Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% @searched_flights.each do |flight| %>
+                <tr>
+                    <td><%= flight.flight_number %></td>
+                    <td><%= flight.departure_airport.name %></td>
+                    <td><%= flight.arrival_airport.name %></td>
+                    <td><%= flight.departure_time.strftime("%B %d, %Y at %I:%M %p") %></td>
+                    <td><%= flight.arrival_time.strftime("%B %d, %Y at %I:%M %p") %></td>
+                    <td><%= number_to_currency(flight.price) %></td>
+                </tr>
+            <% end %>
+        </tbody>
+    </table>
+<% end %>
 
-    <div class="field">
-        <%= form.label :flight_date, "Flight Date" %>
-        <%= select_tag :flight_date, options_for_select(@flight_dates), prompt: "Select Flight Date" %>
-    </div>
 
-    <div class="actions">
-        <%= form.submit "Search Flights" %>
-    </div>
+<br>
+<br>
+<br>
+<% if @flights.any? %>
+    <h2>Available Flights</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Flight</th>
+                <th>Departure</th>
+                <th>Arrival</th>
+                <th>Departure Time</th>
+                <th>Arrival Time</th>
+                <th>Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% @flights.each do |flight| %>
+                <tr>
+                    <td><%= flight.flight_number %></td>
+                    <td><%= flight.departure_airport.name %></td>
+                    <td><%= flight.arrival_airport.name %></td>
+                    <td><%= flight.departure_time.strftime("%B %d, %Y at %I:%M %p") %></td>
+                    <td><%= flight.arrival_time.strftime("%B %d, %Y at %I:%M %p") %></td>
+                    <td><%= number_to_currency(flight.price) %></td>
+                </tr>
+            <% end %>
+        </tbody>
+    </table>
 <% end %>

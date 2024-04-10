@@ -3,7 +3,16 @@ class FlightsController < ApplicationController
     def index
         @flights = Flight.all
         @flight_dates = Flight.pluck(:departure_time).map { |time| time.strftime("%m/%d/%Y") }.uniq
+
+        @searched_flights = Flight.search(params[:departure_airport_id], params[:arrival_airport_id], 
+        params[:flight_date], params[:passenger_count])
+
+        # def duration (flight)
+        #     ((flight.arrival_time - flight.departure_time) / 60).to_i
+        # end
     end
+
+
 
 
     private
