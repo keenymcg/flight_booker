@@ -4,17 +4,12 @@ class Flight < ApplicationRecord
   has_many :reservations
 
   def self.search(departure_airport_id, arrival_airport_id, flight_date, passenger_count) 
-    if (departure_airport_id.nil? &&
-      arrival_airport_id.nil? && 
-      flight_date.nil? && 
-      passenger_count.nil?) 
-      return where(departure_airport_id: departure_airport_id, 
-      arrival_airport_id: arrival_airport_id, 
-      departure_time: flight_date)
-      Rails.logger.info "hello"
+    if departure_airport_id.present? && arrival_airport_id.present? && flight_date.present?
+      where(departure_airport_id: departure_airport_id, 
+            arrival_airport_id: arrival_airport_id, 
+            departure_time: flight_date)
     else 
-      return Flight.all
-      Rails.logger.info "bye"
+      all
     end
   end
 

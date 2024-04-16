@@ -2,66 +2,19 @@
 
 <%= render 'search_form', flight: @flight %>
 
-<br>
-<br>
-<br>
-
-<% if @searched_flights and @searched_flights.any? %>
-    <h2>Searched Results</h2>
-    <table>
-        <thead>
-            <tr>
-                <th>Flight</th>
-                <th>Departure</th>
-                <th>Arrival</th>
-                <th>Departure Time</th>
-                <th>Arrival Time</th>
-                <th>Price</th>
-            </tr>
-        </thead>
-        <tbody>
-            <% @searched_flights.each do |flight| %>
-                <tr>
-                    <td><%= flight.flight_number %></td>
-                    <td><%= flight.departure_airport.name %></td>
-                    <td><%= flight.arrival_airport.name %></td>
-                    <td><%= flight.departure_time.strftime("%B %d, %Y at %I:%M %p") %></td>
-                    <td><%= flight.arrival_time.strftime("%B %d, %Y at %I:%M %p") %></td>
-                    <td><%= number_to_currency(flight.price) %></td>
-                </tr>
-            <% end %>
-        </tbody>
-    </table>
-<% end %>
-
-
-<br>
-<br>
-<br>
-<% if @flights.any? %>
-    <h2>Available Flights</h2>
-    <table>
-        <thead>
-            <tr>
-                <th>Flight</th>
-                <th>Departure</th>
-                <th>Arrival</th>
-                <th>Departure Time</th>
-                <th>Arrival Time</th>
-                <th>Price</th>
-            </tr>
-        </thead>
-        <tbody>
-            <% @flights.each do |flight| %>
-                <tr>
-                    <td><%= flight.flight_number %></td>
-                    <td><%= flight.departure_airport.name %></td>
-                    <td><%= flight.arrival_airport.name %></td>
-                    <td><%= flight.departure_time.strftime("%B %d, %Y at %I:%M %p") %></td>
-                    <td><%= flight.arrival_time.strftime("%B %d, %Y at %I:%M %p") %></td>
-                    <td><%= number_to_currency(flight.price) %></td>
-                </tr>
-            <% end %>
-        </tbody>
-    </table>
-<% end %>
+<% if @searched_flights.present? %>
+    <h2>Searched Flights</h2>
+    <div>
+        <% @searched_flights.each do |flight| %>
+            <div>
+                <p><strong>Flight:</strong> <%= flight.flight_number %></p>
+                <p><strong>Departure:</strong> <%= flight.departure_airport.name %></p>
+                <p><strong>Arrival:</strong> <%= flight.arrival_airport.name %></p>
+                <p><strong>Departure Time:</strong> <%= flight.departure_time.strftime("%B %d, %Y at %I:%M %p") %></p>
+                <p><strong>Arrival Time:</strong> <%= flight.arrival_time.strftime("%B %d, %Y at %I:%M %p") %></p>
+                <p><strong>Price:</strong> <%= number_to_currency(flight.price) %></p>
+            </div>
+            <br>
+        <% end %>
+    </div>
+<% end %>   
