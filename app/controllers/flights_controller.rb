@@ -1,13 +1,11 @@
 class FlightsController < ApplicationController
 
     def index
-        
-        # WORK ON THIS: FLIGHT DATES ISSUE. SEPARATE DATE FROM TIME IN MODEL. MIGHT HELP WITH FORM INPUTS
         @flights = Flight.all
-        @flight_dates = Flight.pluck(:departure_time).map { |time| time.strftime("%m/%d/%Y") }.uniq
+        @flight_dates = Flight.pluck(:departure_date).map { |date| date.strftime("%m/%d/%Y") }.uniq
 
         @searched_flights = Flight.search(params[:departure_airport_id], params[:arrival_airport_id], 
-        params[:flight_date], params[:passenger_count])
+        params[:departure_date], params[:passenger_count])
     end
 
 
