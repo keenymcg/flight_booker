@@ -10,8 +10,8 @@
                 <p><strong>Flight:</strong> <%= flight.flight_number %></p>
                 <p><strong>Departure:</strong> <%= flight.departure_airport.name %></p>
                 <p><strong>Arrival:</strong> <%= flight.arrival_airport.name %></p>
-                <p><strong>Departure Time:</strong> <%= flight.departure_time.strftime("%B %d, %Y at %I:%M %p") %></p>
-                <p><strong>Arrival Time:</strong> <%= flight.arrival_time.strftime("%B %d, %Y at %I:%M %p") %></p>
+                <p><strong>Departure Time:</strong> <%= flight.departure_date.strftime("%B %d, %Y at") %> <%= flight.departure_time.strftime("%I:%M %p") %></p>
+                <p><strong>Arrival Time:</strong> <%= flight.arrival_date.strftime("%B %d, %Y at") %> <%= flight.arrival_time.strftime("%I:%M %p") %></p>
                 <p><strong>Price:</strong> <%= number_to_currency(flight.price) %></p>
             </div>
             <br>

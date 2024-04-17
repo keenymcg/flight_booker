@@ -15,8 +15,8 @@
     </div>
 
     <div class="field">
-        <%= form.label :flight_date, "Flight Date" %>
-        <%= select_tag :flight_date, options_for_select(@flight_dates), prompt: "Select Flight Date" %>
+        <%= form.label :departure_date, "Flight Date" %>
+        <%= form.date_field :departure_date %>
     </div>
 
     <div class="actions">
