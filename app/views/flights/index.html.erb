@@ -3,18 +3,28 @@
 <%= render 'search_form', flight: @flight %>
 
 <% if @searched_flights.present? %>
-    <h2>Searched Flights</h2>
-    <div>
-        <% @searched_flights.each do |flight| %>
-            <div>
-                <p><strong>Flight:</strong> <%= flight.flight_number %></p>
-                <p><strong>Departure:</strong> <%= flight.departure_airport.name %></p>
-                <p><strong>Arrival:</strong> <%= flight.arrival_airport.name %></p>
-                <p><strong>Departure Time:</strong> <%= flight.departure_date.strftime("%B %d, %Y at") %> <%= flight.departure_time.strftime("%I:%M %p") %></p>
-                <p><strong>Arrival Time:</strong> <%= flight.arrival_date.strftime("%B %d, %Y at") %> <%= flight.arrival_time.strftime("%I:%M %p") %></p>
-                <p><strong>Price:</strong> <%= number_to_currency(flight.price) %></p>
-            </div>
-            <br>
-        <% end %>
-    </div>
+    <%= form_with(model: @flight, url: new_booking_path, method: "get") do |form| %>
+        <%= form.hidden_field :passenger_count, value: @passenger_count %> <!-- CHANGE NUM_OF_PASS TO MY OWN VARIABLE -->
+        
+        <h2>Searched Flights</h2>
+        <div>
+            <% @searched_flights.each do |flight| %>
+                <div>
+                    <label>
+                        <%= form.radio_button :selected_flight_id, flight.id %>
+                        <p><strong>Flight:</strong> <%= flight.flight_number %></p>
+                        <p><strong>Departure:</strong> <%= flight.departure_airport.name %></p>
+                        <p><strong>Arrival:</strong> <%= flight.arrival_airport.name %></p>
+                        <p><strong>Departure Time:</strong> <%= flight.departure_date.strftime("%B %d, %Y at") %> <%= flight.departure_time.strftime("%I:%M %p") %></p>
+                        <p><strong>Arrival Time:</strong> <%= flight.arrival_date.strftime("%B %d, %Y at") %> <%= flight.arrival_time.strftime("%I:%M %p") %></p>
+                        <p><strong>Price:</strong> <%= number_to_currency(flight.price) %></p>
+                    </label>
+                </div>
+                <br>
+            <% end %>
+        </div>
+        <%= form.submit "Book Selected Flight" %>
+    <% end %>
+<% else %>
+    <p>Sorry, no flights found.</p>
 <% end %>   
