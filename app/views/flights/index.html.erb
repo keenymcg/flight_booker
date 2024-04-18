@@ -11,7 +11,7 @@
             <% @searched_flights.each do |flight| %>
                 <div>
                     <label>
-                        <%= form.radio_button :selected_flight_id, flight.id %>
+                        <%= form.radio_button :flight_id, flight.id %>
                         <p><strong>Flight:</strong> <%= flight.flight_number %></p>
                         <p><strong>Departure:</strong> <%= flight.departure_airport.name %></p>
                         <p><strong>Arrival:</strong> <%= flight.arrival_airport.name %></p>

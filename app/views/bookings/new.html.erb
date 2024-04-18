@@ -1,2 +1,46 @@
-<h1>Bookings#new</h1>
-<p>Find me in app/views/bookings/new.html.erb</p>
+<h1>Your Booking</h1>
+
+<%= form_with model: @booking do |form| %>
+    <% if @booking.errors.any? %>
+        <div id="error_explanation">
+            <h2><%= pluralize(@booking.errors.count, "error") %> prohibited this booking from being created:</h2>
+            <ul>
+                <% @booking.errors.each do |error| %>
+                <li><%= error.full_message %></li>
+                <% end %>
+            </ul>
+        </div>
+    <% end %>
+    
+    <h3><%= "#{@flight.departure_airport.location}" %> to <%= "#{@flight.arrival_airport.location}" %></h3>
+    <p> Number of Passengers: <%= @passenger_count %> </p>
+    <h4> Duration: <%= @flight.duration %> minutes</h4>
+    <h4> Flight Number: <%= @flight.flight_number %> </h4>
+    <h4> Price: $<%= @flight.price %> USD</h4>
+    <h4> Departure: <%= @flight.departure_date_formatted %> at <%= @flight.departure_time_formatted %></h4>
+    <h4> Arrival: <%= @flight.arrival_date_formatted %> at <%= @flight.arrival_time_formatted %></h4>
+
+    <hr>
+
+    <h2>Passenger Information</h2>
+    <% (1..@passenger_count.to_i).each do |passenger_number| %>
+        <%= form.hidden_field :flight_id, value: @flight.id %> 
+        <h3>Passenger <%= passenger_number %> Information</h3>
+        <%= form.fields_for :passengers, @booking.passengers.build do |passenger_form| %>
+            <%= passenger_form.label :name, "Name" %>
+            <%= passenger_form.text_field :name %>
+
+            <%= passenger_form.label :age, "Age" %>
+            <%= passenger_form.number_field :age %>
+
+            <%= passenger_form.label :gender, "Gender" %>
+            <%= passenger_form.text_field :gender %>
+        <% end %>
+    <% end %>
+
+<br>
+<br>
+
+<%= form.submit "Purchase Flight" %>
+
+<% end %>

@@ -6,6 +6,9 @@ class User < ApplicationRecord
 
   # # Associations
   # has_many :reservations # deprecated? Using bookings instead of reservations
-  has_many :flights, through: :reservations
+  # has_many :flights, through: :reservations
   
+  has_many :bookings
+  has_many :flights, through: :bookings
+
 end
