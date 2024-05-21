@@ -1,6 +1,6 @@
-# Flight Booker
+# [Ruby on Rails Project: Flight Booker](https://www.theodinproject.com/lessons/ruby-on-rails-flight-booker)
 
-This is an exercise for [The Odin Project](https://www.theodinproject.com/lessons/ruby-on-rails-flight-booker) as part of their Ruby on Rails curriculum. The goal of this project is to provide a deep dive into the Rails framework, focusing on some of the main features of Rails including:
+This is an exercise for The Odin Project as part of their Full Stack Ruby on Rails curriculum. The goal of this project is to provide a deep dive into the Rails framework, focusing on some of the main features of Rails including:
 
 - **Devise**: This project uses Devise for user authentication. It allows users to sign up, log in, and log out.
 
